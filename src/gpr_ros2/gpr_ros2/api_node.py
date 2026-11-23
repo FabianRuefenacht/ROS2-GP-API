@@ -303,39 +303,78 @@ class GprApiNode(Node):
             response, operation, "Stop measurement", GprEvent.MEASUREMENT_STOPPED
         )
 
+    
     def _poll_status(self) -> None:
+        """Poll the GP API and publish the current device status."""
         stamp = self._now()
         status = GprStatus()
         status.header.stamp = stamp
         status.battery_percentage = -1
+
         try:
             screen = self.api.get_screen()
-            probe = self.api.get_probe()
-            self._last_screen = str(screen.get("screen", ""))
+
+            # A successful HTTP response confirms API reachability.
             status.api_reachable = True
-            self._last_error = ""
+            self._last_screen = str(screen.get("screen", ""))
             status.app_screen = self._last_screen
-            status.probe_connected = bool(probe.get("connected", False))
+
+            probe = self.api.get_probe()
+
+            status.probe_connected = bool(
+                probe.get("connected", False)
+            )
+
             details = probe.get("probe") or {}
             contract = probe.get("contract") or {}
+
             status.device_name = str(details.get("name", ""))
-            status.serial_number = str(details.get("serialNumber", ""))
-            status.firmware_version = str(details.get("firmware", ""))
-            status.hardware_revision = str(details.get("hardwareRevision", ""))
+            status.serial_number = str(
+                details.get("serialNumber", "")
+            )
+            status.firmware_version = str(
+                details.get("firmware", "")
+            )
+            status.hardware_revision = str(
+                details.get("hardwareRevision", "")
+            )
+
             battery = details.get("batteryStatus")
-            if isinstance(battery, int) and not isinstance(battery, bool):
+            if isinstance(battery, int) and not isinstance(
+                battery, bool
+            ):
                 status.battery_percentage = battery
-            status.battery_health = str(details.get("batteryHealth", ""))
-            status.contract_name = str(contract.get("tierName", ""))
-            status.contract_expiration_date = str(contract.get("expirationDate", ""))
+
+            status.battery_health = str(
+                details.get("batteryHealth", "")
+            )
+            status.contract_name = str(
+                contract.get("tierName", "")
+            )
+            status.contract_expiration_date = str(
+                contract.get("expirationDate", "")
+            )
+
+            self._last_error = ""
+
             if self._last_screen == "MEASUREMENT":
                 self._publish_measurement(stamp)
-        except GprApiError as exc:
+
+        except GprHttpError as exc:
+            # The API responded, even though the request failed.
+            status.api_reachable = True
             self._last_error = f"{exc.error_code}: {exc}"
+
+        except GprApiError as exc:
+            # Connection failures and timeouts do not confirm reachability.
+            self._last_error = f"{exc.error_code}: {exc}"
+
         except Exception as exc:
             self._last_error = f"INTERNAL_ERROR: {exc}"
+
         status.last_error = self._last_error
         self.status_pub.publish(status)
+
 
     def _publish_measurement(self, stamp) -> None:
         try:
