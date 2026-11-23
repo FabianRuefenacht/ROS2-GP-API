@@ -1,0 +1,30 @@
+
+# Establish a connection between the GP application and a GPR device.
+# ROS 2 service: /gpr/connect
+# GP API endpoint: POST /probe/connect
+
+# Request
+
+# Serial number of the target GPR device.
+string serial_number
+
+# IP address of the GPR device.
+# Leave empty if the connection should use the API default.
+string ip_address
+
+---
+
+# Response
+
+# True if the requested device is confirmed to be connected.
+bool success
+
+# Serial number of the connected device, if available.
+string connected_serial_number
+
+# GP API error code, if the operation failed.
+# Empty string indicates no reported error.
+string error_code
+
+# Human-readable result or error description.
+string message

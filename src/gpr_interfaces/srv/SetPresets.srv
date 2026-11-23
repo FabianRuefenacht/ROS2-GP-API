@@ -1,0 +1,59 @@
+
+# Configure GPR acquisition presets.
+# ROS 2 service: /gpr/set_presets
+# GP API endpoint: POST /measurement/presets
+#
+# A measurement must already be open.
+#
+# The GP API expects different parameters depending on
+# the selected trigger mode.
+
+# Request
+
+# Trigger modes.
+string FIXED_STEP="FIXED_STEP"
+string TIMED="TIMED"
+string EXTERNAL="EXTERNAL"
+
+# Acquisition resolutions.
+string MAX_SPEED="MAX_SPEED"
+string MAX_DEPTH="MAX_DEPTH"
+
+# Requested trigger mode.
+string trigger_mode
+
+# Requested acquisition resolution.
+string resolution
+
+# Measurement unit as expected by the GP API.
+# Example: METRIC
+string unit
+
+# Time-triggered acquisition frequency in scans per second (Hz).
+# Used only when trigger_mode == TIMED.
+float32 scan_frequency_hz
+
+# Fixed-step repetition rate as expected by the GP API.
+# Used only when trigger_mode == FIXED_STEP.
+float32 repetition_rate
+
+---
+
+# Response
+
+# True if the presets were applied and verified.
+bool success
+
+# Actual settings reported by GET /measurement/info.
+string trigger_mode
+string resolution
+string unit
+float32 scan_frequency_hz
+float32 repetition_rate
+
+# GP API or wrapper error code.
+# Empty string indicates no reported error.
+string error_code
+
+# Human-readable result or error description.
+string message

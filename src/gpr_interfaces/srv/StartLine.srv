@@ -1,0 +1,41 @@
+
+# Start a new GPR measurement line.
+# ROS 2 service: /gpr/start_line
+# GP API endpoint: POST /measurement/line/start
+#
+# A measurement must already exist and the acquisition
+# presets must be configured before starting a line.
+#
+# The service verifies that the line has started before
+# reporting success.
+
+# Request
+
+# No request parameters are required by the GP API.
+
+---
+
+# Response
+
+# True if the measurement line was successfully started
+# and its state was verified.
+bool success
+
+# Line index reported by GET /measurement/line.
+# Zero indicates an unavailable line index.
+uint32 line_index
+
+# Start timestamp returned by the GP API.
+# Corresponds to clientStartTimestamp in Unix milliseconds.
+# Zero indicates that no valid API timestamp was received.
+int64 client_start_timestamp_ms
+
+# Whether the API returned a valid start timestamp.
+bool has_api_timestamp
+
+# GP API or wrapper error code.
+# Empty string indicates no reported error.
+string error_code
+
+# Human-readable result or error description.
+string message

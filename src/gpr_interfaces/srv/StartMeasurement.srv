@@ -1,0 +1,36 @@
+
+# Create a new GPR measurement in the GP application.
+# ROS 2 service: /gpr/start_measurement
+# GP API endpoint: POST /measurement/start
+#
+# This operation creates a measurement but does not start
+# radar data acquisition.
+
+# Request
+
+# Name of the new measurement.
+string measurement_name
+
+# Measurement type as supported by the GP API.
+# Example: LINE_SCAN
+string measurement_type
+
+---
+
+# Response
+
+# True if the measurement was successfully created and verified.
+bool success
+
+# Actual measurement name reported by GET /measurement/info.
+string measurement_name
+
+# Actual measurement type reported by GET /measurement/info.
+string measurement_type
+
+# GP API error code, if available.
+# Empty string indicates no reported error.
+string error_code
+
+# Human-readable result or error description.
+string message
