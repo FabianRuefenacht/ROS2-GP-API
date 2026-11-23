@@ -20,7 +20,7 @@ from gpr_interfaces.msg import (
 from gpr_interfaces.srv import Connect, SetPresets, StartLine, StartMeasurement
 
 from .api_client import GprApiClient
-from .exceptions import GprApiError
+from .exceptions import GprApiError, GprHttpError
 
 
 class GprApiNode(Node):
@@ -151,15 +151,28 @@ class GprApiNode(Node):
                     "Probe serial and IP are required; set probe_serial/probe_ip "
                     "parameters or pass both in the Connect request"
                 )
-            probe_status = self.api.get_probe()
+            
+            try:
+                probe_status = self.api.get_probe()
+            except GprHttpError as exc:
+                if (
+                    exc.status_code == 403
+                    and "[NOT_CONNECTED_TO_PROBE]" in str(exc)
+                ):
+                    probe_status = {"connected": False}
+                else:
+                    raise
+
             if probe_status.get("connected"):
                 current = probe_status.get("probe") or {}
                 serial = current.get("serialNumber", "")
+
                 if serial != probe_serial:
                     raise ValueError(f"Another probe is connected: {serial}")
             else:
-                # The observed GP API requires both serialNumber and ip.
+                # The GP API requires both the probe serial number and IP.
                 self.api.connect_probe(probe_serial, probe_ip)
+
             verified = self.api.get_probe()
             serial = (verified.get("probe") or {}).get("serialNumber", "")
             if not verified.get("connected") or serial != probe_serial:
