@@ -242,3 +242,6 @@ data/processed/*
 # Local configuration and credentials
 .env
 *.local.yaml
+
+# real params
+src/gpr_ros2/config/gpr_params_live.yaml
