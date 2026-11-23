@@ -3,6 +3,18 @@
 
 Start both GPR nodes with gpr.launch.py before running this script.
 Connection settings are read by the nodes from gpr_params_live.yaml.
+
+Start this script with:
+
+TERMINAL 1:
+ros2 launch gpr_ros2 gpr.launch.py \
+  config_file:=/home/jetson/gpr_ros2_ws/src/gpr_ros2/config/gpr_params_live.yaml
+  
+TERMINAL 2:
+python3 scripts/example.py \
+  --duration 10 \
+  --frequency 1 \
+  --name ROS2_GP8000_Example_01
 """
 
 import argparse
