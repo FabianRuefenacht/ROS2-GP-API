@@ -1,0 +1,13 @@
+gpr_api_node:
+  ros__parameters:
+    # Network address of the iPad hosting the GP REST API (required).
+    ipad_host: ""
+    ipad_port: 9000
+
+    # GP8000 discovery/connection details (required for /gpr/connect
+    # unless supplied in the service request).
+    probe_ip: ""
+    probe_serial: ""
+
+    request_timeout_s: 10.0
+    status_period_s: 2.0

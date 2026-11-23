@@ -38,7 +38,7 @@ setup(
     tests_require=["pytest"],
     entry_points={
         "console_scripts": [
-            # Node executables will be registered here.
+            "api_node = gpr_ros2.api_node:main",
         ],
     },
 )
