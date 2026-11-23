@@ -1,0 +1,65 @@
+
+# Export raw GPR measurement data from the GP application.
+# ROS 2 action: /gpr/export_raw
+# GP API endpoint: POST /measurement/export/raw
+#
+# The export is downloaded as a ZIP archive containing
+# SEG-Y data and associated metadata files.
+
+# Goal
+
+# Directory in which the downloaded ZIP archive will be stored.
+# Must be an absolute path on the machine running gpr_export_node.
+# An empty string uses the configured default export directory.
+string output_directory
+
+# If true, extract the downloaded ZIP archive after saving it.
+bool extract_archive
+
+# If true, allow overwriting existing files with the same name.
+# If false, an existing file causes an error.
+bool overwrite
+
+---
+
+# Result
+
+# True if the export was completed successfully.
+bool success
+
+# Absolute path to the downloaded ZIP archive.
+# Empty string if no archive was successfully saved.
+string archive_path
+
+# Absolute path to the extracted directory.
+# Empty string if extraction was not requested or failed.
+string extracted_directory
+
+# Size of the downloaded ZIP archive in bytes.
+uint64 archive_size_bytes
+
+# GP API or wrapper error code.
+# Empty string indicates no reported error.
+string error_code
+
+# Human-readable result or error description.
+string message
+
+---
+
+# Feedback
+
+# Current export stage.
+# Examples: REQUESTING, DOWNLOADING, EXTRACTING, VALIDATING.
+string stage
+
+# Number of bytes downloaded so far.
+uint64 bytes_downloaded
+
+# Total expected download size in bytes.
+# Zero indicates that the server did not provide a content length.
+uint64 total_bytes
+
+# Download progress from 0 to 100 percent.
+# -1 indicates that the total size is unknown.
+float32 progress_percent
