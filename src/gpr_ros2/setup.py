@@ -36,9 +36,12 @@ setup(
     ),
     license="MIT",
     tests_require=["pytest"],
+    
     entry_points={
         "console_scripts": [
             "api_node = gpr_ros2.api_node:main",
+            "export_node = gpr_ros2.export_node:main",
         ],
     },
+
 )

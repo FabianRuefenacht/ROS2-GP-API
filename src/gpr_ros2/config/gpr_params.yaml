@@ -1,7 +1,7 @@
 gpr_api_node:
   ros__parameters:
     # Network address of the iPad hosting the GP REST API (required).
-    ipad_host: ""
+    ipad_host: "192.168.178.68"
     ipad_port: 9000
 
     # GP8000 discovery/connection details (required for /gpr/connect
@@ -11,3 +11,11 @@ gpr_api_node:
 
     request_timeout_s: 10.0
     status_period_s: 2.0
+
+gpr_export_node:
+  ros__parameters:
+    ipad_host: "192.168.178.68"
+    ipad_port: 9000
+    request_timeout_s: 10.0
+    export_timeout_s: 300.0
+    export_directory: "~/gpr_data/raw"
