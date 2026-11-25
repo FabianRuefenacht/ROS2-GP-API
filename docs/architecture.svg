@@ -1,8 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="530" viewBox="0 0 1120 530" role="img" aria-labelledby="title desc">
-  <title id="title">ROS2-GP-API system architecture</title>
-  <desc id="desc">ROS clients send services and actions to two ROS 2 nodes that communicate through HTTP with the GP app on an iPad. The iPad connects over the local network to a Proceq GPR probe; status and exported ZIP data are returned to the ROS environment.</desc>
-  <defs>
-    <style>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1120"
+   height="465"
+   viewBox="0 0 1120 465"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg26"
+   sodipodi:docname="architecture.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview26"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.0650943"
+     inkscape:cx="583.51639"
+     inkscape:cy="65.252436"
+     inkscape:window-width="3440"
+     inkscape:window-height="1331"
+     inkscape:window-x="-8"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg26" />
+  <title
+     id="title">ROS2-GP-API system architecture</title>
+  <desc
+     id="desc">ROS clients send services and actions to two ROS 2 nodes that communicate through HTTP with the GP app on an iPad. The iPad connects over the local network to a Proceq GPR probe; status and exported ZIP data are returned to the ROS environment.</desc>
+  <defs
+     id="defs2">
+    <style
+       id="style1">
       text{font-family:Inter,Arial,Helvetica,sans-serif;fill:#25354a}
       .title{font-size:26px;font-weight:700;letter-spacing:-.6px}
       .sub{font-size:13px;fill:#64748b}
@@ -15,52 +54,270 @@
       .arrow{stroke:#54718f;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
       .green{stroke:#38947e}
     </style>
-    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1 L8 4.5 L1 8" fill="none" stroke="#54718f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
-    <marker id="arrowgreen" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1 1 L8 4.5 L1 8" fill="none" stroke="#38947e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker
+       id="arrow"
+       markerWidth="9"
+       markerHeight="9"
+       refX="7"
+       refY="4.5"
+       orient="auto">
+      <path
+         d="M 1,1 8,4.5 1,8"
+         fill="none"
+         stroke="#54718f"
+         stroke-width="1.7"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         id="path1" />
+    </marker>
+    <marker
+       id="arrowgreen"
+       markerWidth="9"
+       markerHeight="9"
+       refX="7"
+       refY="4.5"
+       orient="auto">
+      <path
+         d="M 1,1 8,4.5 1,8"
+         fill="none"
+         stroke="#38947e"
+         stroke-width="1.7"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         id="path2" />
+    </marker>
   </defs>
-  <rect width="1120" height="530" rx="20" fill="#f8fafc"/>
-  <text class="title" x="34" y="48">System architecture</text>
-  <text class="sub" x="34" y="75">ROS 2 Humble · HTTP API hosted on the iPad · configurable network addresses</text>
-
+  <rect
+     width="1120"
+     height="463.61087"
+     rx="20"
+     fill="#f8fafc"
+     id="rect2"
+     x="0"
+     y="0" />
+  <text
+     class="title"
+     x="34"
+     y="48"
+     id="text2">System architecture</text>
+  <text
+     class="sub"
+     x="34"
+     y="75"
+     id="text3">ROS 2 Humble · HTTP API hosted on the iPad · configurable network addresses</text>
   <!-- ROS 2 host -->
-  <rect class="panel" x="30" y="111" width="584" height="334" rx="16"/>
-  <text class="h" x="52" y="143">ROS 2 host</text><text class="tiny" x="52" y="162">Jetson / robot · gpr_ros2 + gpr_interfaces</text>
-  <rect class="node" x="51" y="184" width="174" height="97" rx="11"/>
-  <text class="h" x="67" y="212">ROS 2 client</text>
-  <text class="body" x="67" y="236">Services / action</text>
-  <text class="tiny" x="67" y="258">scripts/example.py</text>
-  <rect class="node" x="279" y="181" width="306" height="95" rx="11"/>
-  <text class="h" x="296" y="211">gpr_api_node</text>
-  <text class="body" x="296" y="234">Control · status · timestamps</text>
-  <text class="tiny" x="296" y="254">GprApiClient (httpx)</text>
-  <rect class="node" x="279" y="307" width="306" height="95" rx="11"/>
-  <text class="h" x="296" y="336">gpr_export_node</text>
-  <text class="body" x="296" y="359">ZIP download · validation</text>
-  <text class="tiny" x="296" y="379">SEG-Y / JSON / CSV</text>
-  <path class="arrow" d="M225 218 H279" marker-end="url(#arrow)"/>
-  <path class="arrow" d="M225 254 H245 V353 H279" marker-end="url(#arrow)"/>
-  <text class="tiny" x="52" y="420">Both nodes read gpr_params_live.yaml</text>
-
+  <rect
+     class="panel"
+     x="30"
+     y="133.5723"
+     width="584"
+     height="311.4277"
+     rx="16"
+     id="rect3" />
+  <text
+     class="h"
+     x="52"
+     y="162.91673"
+     id="text4">ROS 2 host</text>
+  <rect
+     class="node"
+     x="51"
+     y="184"
+     width="174"
+     height="97"
+     rx="11"
+     id="rect5" />
+  <text
+     class="h"
+     x="67"
+     y="212"
+     id="text6">ROS 2 client</text>
+  <text
+     class="body"
+     x="67"
+     y="236"
+     id="text7"><tspan
+       sodipodi:role="line"
+       id="tspan26"
+       x="67"
+       y="236">Services</tspan><tspan
+       sodipodi:role="line"
+       id="tspan27"
+       x="67"
+       y="253.5"></tspan><tspan
+       sodipodi:role="line"
+       x="67"
+       y="271"
+       id="tspan28">Action</tspan></text>
+  <rect
+     class="node"
+     x="279"
+     y="181"
+     width="306"
+     height="95"
+     rx="11"
+     id="rect8" />
+  <text
+     class="h"
+     x="296"
+     y="211"
+     id="text9">gpr_api_node</text>
+  <text
+     class="body"
+     x="296"
+     y="234"
+     id="text10">Control · status · timestamps</text>
+  <text
+     class="tiny"
+     x="296"
+     y="254"
+     id="text11">GprApiClient (httpx)</text>
+  <rect
+     class="node"
+     x="279"
+     y="307"
+     width="306"
+     height="95"
+     rx="11"
+     id="rect11" />
+  <text
+     class="h"
+     x="296"
+     y="336"
+     id="text12">gpr_export_node</text>
+  <text
+     class="body"
+     x="296"
+     y="359"
+     id="text13">ZIP download · validation</text>
+  <text
+     class="tiny"
+     x="296"
+     y="379"
+     id="text14">SEG-Y / JSON / CSV</text>
+  <path
+     class="arrow"
+     d="m 225,229.45212 h 54"
+     marker-end="url(#arrow)"
+     id="path14"
+     sodipodi:nodetypes="cc" />
+  <path
+     class="arrow"
+     d="m 225,267.77574 h 20 V 353 h 34"
+     marker-end="url(#arrow)"
+     id="path15"
+     sodipodi:nodetypes="cccc" />
+  <text
+     class="tiny"
+     x="52"
+     y="420"
+     id="text15">Both nodes read gpr_params.yaml</text>
   <!-- iPad -->
-  <rect class="device" x="688" y="168" width="184" height="175" rx="18"/>
-  <rect x="704" y="184" width="152" height="126" rx="9" fill="#e8f0f8"/>
-  <text class="h" x="726" y="222">iPad</text>
-  <text class="body" x="719" y="250">GP application</text>
-  <text class="tiny" x="721" y="273">REST API · :9000</text>
-  <circle cx="780" cy="328" r="5" fill="#bac9d7"/>
-  <path class="arrow" d="M585 225 H688" marker-end="url(#arrow)"/>
-  <text class="tiny" x="619" y="207">HTTP</text>
-  <path class="arrow green" d="M688 356 H637 V365 H585" marker-end="url(#arrowgreen)"/>
-  <text class="tiny" x="618" y="384">ZIP</text>
-
+  <rect
+     class="device"
+     x="688"
+     y="168"
+     width="184"
+     height="175"
+     rx="18"
+     id="rect15" />
+  <rect
+     x="704"
+     y="184"
+     width="152"
+     height="126"
+     rx="9"
+     fill="#e8f0f8"
+     id="rect16" />
+  <text
+     class="h"
+     x="726"
+     y="222"
+     id="text16">iPad</text>
+  <text
+     class="body"
+     x="733.60559"
+     y="250"
+     id="text17">GP application</text>
+  <text
+     class="tiny"
+     x="735.60559"
+     y="273"
+     id="text18">REST API · :9000</text>
+  <circle
+     cx="780"
+     cy="328"
+     r="5"
+     fill="#bac9d7"
+     id="circle18" />
+  <path
+     class="arrow"
+     d="M 585,225 H 688"
+     marker-end="url(#arrow)"
+     id="path18" />
+  <text
+     class="tiny"
+     x="619"
+     y="207"
+     id="text19">HTTP</text>
+  <path
+     class="arrow green"
+     d="M 688,298.90536 H 637 V 365 h -52"
+     marker-end="url(#arrowgreen)"
+     id="path19"
+     sodipodi:nodetypes="cccc" />
+  <text
+     class="tiny"
+     x="618"
+     y="384"
+     id="text20">ZIP</text>
   <!-- Probe -->
-  <rect class="device" x="927" y="205" width="164" height="106" rx="15"/>
-  <text class="h" x="951" y="237">GPR probe</text>
-  <text class="body" x="946" y="261">GP8000 tested</text>
-  <text class="tiny" x="942" y="284">GP8100/8800 untested</text>
-  <path class="arrow" d="M872 254 H927" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text class="tiny" x="882" y="236">LAN</text>
-
-  <text class="sub" x="36" y="482">Control: ROS 2 → HTTP → GP app → GPR probe</text>
-  <text class="sub" x="36" y="502">Data: GP app → streamed ZIP → ROS host · timestamps kept for later analysis</text>
+  <rect
+     class="device"
+     x="927"
+     y="205"
+     width="164"
+     height="106"
+     rx="15"
+     id="rect20" />
+  <text
+     class="h"
+     x="951"
+     y="237"
+     id="text21">GPR probe</text>
+  <text
+     class="body"
+     x="960.60559"
+     y="261"
+     id="text22">GP8000</text>
+  <path
+     class="arrow"
+     d="m 872,254 h 55"
+     marker-start="url(#arrow)"
+     marker-end="url(#arrow)"
+     id="path23" />
+  <text
+     class="tiny"
+     x="882"
+     y="236"
+     id="text24">LAN</text>
+  <text
+     class="sub"
+     x="34.008327"
+     y="97.606987"
+     id="text25">Control: ROS 2 → HTTP → GP app → GPR probe</text>
+  <text
+     class="sub"
+     x="34.008327"
+     y="117.60699"
+     id="text26">Data: GP app → streamed ZIP → ROS host</text>
+  <metadata
+     id="metadata28">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>ROS2-GP-API system architecture</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
 </svg>
